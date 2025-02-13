@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nginx-statefulset
+spec:
+  replicas: 2
+  serviceName: svc-nginx
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      Labels:
+        app: nginx
+    spec:
+      container:
+      - name: nginx-cont
+        image: alvinselva/nginx:latest
+        ports:
+        - containerport: 80
+        resources:
+          requests:
+            cpu: "120"
+            memory: "120Mi"
+          Limits:
+            cpu: "500"
+            memory: "500Mi"
+        volumeMounts:
+          name: nginx-pvc
+          mountpaths: /var/cache/nginx/html
+
+      volumes:
+        name: nginx-pvc
+        PersistentVolumeClaim:
+          claimname: nginx-firstpvc
+
