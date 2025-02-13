@@ -1,4 +1,5 @@
 FROM nginx:1.19-alpine
+#Creating user and group
 RUN addgroup -S nginx && adduser -S nginx -G nginx
 RUN chown -R nginx:nginx /var/cache/nginx /var/run /var/log/nginx
 USER nginx
