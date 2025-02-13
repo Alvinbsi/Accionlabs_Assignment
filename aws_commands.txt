@@ -1,1 +1,5 @@
 aws -F"." '/INFO User/ {print $2}' server.log
+
+or
+
+sed r'\b [A-Za-z0-9.%+-] + @[A-Za-z0-9.-] +/.[A-Z|a-z]{2,} \b mail.log
